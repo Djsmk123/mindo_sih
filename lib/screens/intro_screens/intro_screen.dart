@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mindo/components/FadeAnimation.dart';
 import 'package:mindo/constants.dart';
 import 'package:mindo/screens/authentication_screens/login_screen.dart';
 import 'package:mindo/screens/authentication_screens/signup_screen.dart';
@@ -41,6 +44,18 @@ class _IntroScreenState extends State<IntroScreen> {
     // TODO: implement initState
     super.initState();
     headerImage=Image.asset("assets/images/intro_screen/image5.png");
+    Timer.periodic(const Duration(seconds: 10), (timer) {
+      if(currentIndex!=intros.length-1)
+        {
+          setState((){
+            currentIndex++;
+          });
+
+        }
+      else{
+        timer.cancel();
+      }
+    });
   }
 
 
@@ -74,79 +89,84 @@ class _IntroScreenState extends State<IntroScreen> {
             ],
           ),
           GestureDetector(
-            onPanUpdate: (details) {
+            onHorizontalDragUpdate: (details) {
               // Swiping in right direction.
-              if (details.delta.dx > 0) {
+              if (details.delta.direction > 0) {
                 setState((){
                   if(currentIndex!=intros.length-1) {
                     currentIndex++;
                   }
                 });
+
               }
 
               // Swiping in left direction.
-              if (details.delta.dx < 0) {
+              else {
                 setState((){
                   if(currentIndex!=0) {
                     currentIndex--;
                   }
                 });
+
               }
             },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(child: Text(
-                        intros[currentIndex]['title'],
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ))
-                    ],
-                  ),
-                  SizedBox(height: 20.h,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(child: Text(
-                        intros[currentIndex]['details'],
+            child: FadeAnimation(
+              1.5,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(child: Text(
+                          intros[currentIndex]['title'],
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ))
+                      ],
+                    ),
+                    SizedBox(height: 20.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(child: Text(
+                          intros[currentIndex]['details'],
 
-                        style: TextStyle(
-                          color: const Color(0XFFBEBDBF),
-                          fontSize:16.sp,
-                        )
-                      ))
-                    ],
-                  ),
-                  SizedBox(height: 80.h,),
-                  Row(
-                    children: [
-                      Flexible(child: CustomButton(expandedWidth: true, onTap: () {
-                        if(currentIndex!=intros.length-1)
-                          {
-                            setState((){
-                              currentIndex++;
-                            });
+                          style: TextStyle(
+                            color: const Color(0XFFBEBDBF),
+                            fontSize:16.sp,
+                          )
+                        ))
+                      ],
+                    ),
+                    SizedBox(height: 80.h,),
+                    Row(
+                      children: [
+                        Flexible(child: CustomButton(expandedWidth: true, onTap: () {
+                          if(currentIndex!=intros.length-1)
+                            {
+                              setState((){
+                                currentIndex++;
+                              });
+                            }
+                          else{
+                            Navigator.push(context, MaterialPageRoute(builder: (builder)=>const LoginScreen()));
                           }
-                        else{
-                          Navigator.push(context, MaterialPageRoute(builder: (builder)=>const LoginScreen()));
-                        }
 
-                      }, buttonText: (currentIndex!=intros.length-1?'Continue':"Sign  in").toUpperCase())),
+                        }, buttonText: (currentIndex!=intros.length-1?'Continue':"Sign  in").toUpperCase())),
 
-                      Visibility(
-                          visible:currentIndex==intros.length-1 ,
-                          child: Flexible(child: CustomButton(
-                              color: Colors.white,
-                              expandedWidth: true, onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (builder)=>const SignUpScreen()));
-                          }, buttonText:"Register".toUpperCase(),textColor: const Color(0XFF545151),)))
-                    ],
-                  ),
-                ],
+                        Visibility(
+                            visible:currentIndex==intros.length-1 ,
+                            child: Flexible(child: CustomButton(
+                                color: Colors.white,
+                                expandedWidth: true, onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (builder)=>const SignUpScreen()));
+                            }, buttonText:"Register".toUpperCase(),textColor: const Color(0XFF545151),)))
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
