@@ -185,7 +185,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                       if(formKey.currentState!.validate()){
                         Navigator.popUntil(context, (route) => route.isFirst);
-                        Navigator.push(context, MaterialPageRoute(builder: (builder)=>LevelSelectionScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (builder)=>const LevelSelectionScreen()));
                       }
                     }, buttonText:"Sign  in".toUpperCase()),
                   ),

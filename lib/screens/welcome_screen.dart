@@ -16,7 +16,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late Image backgroundImg;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     backgroundImg=Image.asset("assets/icons/app_logo.png");
     Future.delayed(const Duration(seconds: 2)).then((value){
@@ -49,7 +48,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 50),
                 child: backgroundImg,
               ),
-
               Visibility(
                 visible: isLoading,
                 child: const CircularProgressIndicator(

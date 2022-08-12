@@ -29,6 +29,7 @@ class CustomTextInputContainer extends StatefulWidget {
   final TextInputType keyboardTyp;
   int maxLines;
   bool isPassword;
+  
   @override
   State<CustomTextInputContainer> createState() =>
       _CustomTextInputContainerState();
@@ -38,6 +39,7 @@ class _CustomTextInputContainerState extends State<CustomTextInputContainer> {
   var error = "";
   var periodicTimer = Timer.periodic(const Duration(seconds: 1), (timer) {});
   bool isVisiblePassword=false;
+
   hideError() async {
     periodicTimer = Timer.periodic(const Duration(seconds: 10), (timer) {
       if (error != "") {
@@ -73,13 +75,12 @@ class _CustomTextInputContainerState extends State<CustomTextInputContainer> {
            onChanged: widget.valueChanged,
            keyboardType: widget.keyboardTyp,
            maxLines: widget.maxLines,
-
            autocorrect: true,
            obscureText: widget.isPassword?isVisiblePassword:false,
            decoration: InputDecoration(
                hintText: widget.label,
                hintStyle: TextStyle(
-                 color: Color(0XFF666161),
+                 color: const Color(0XFF666161),
                  fontSize: 14.sp,
                ),
                //labelText: widget.label,

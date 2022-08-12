@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mindo/components/FadeAnimation.dart';
-import 'package:mindo/constants.dart';
 import 'package:mindo/screens/authentication_screens/login_screen.dart';
 import 'package:mindo/screens/authentication_screens/signup_screen.dart';
 
@@ -41,7 +40,6 @@ class _IntroScreenState extends State<IntroScreen> {
   ];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     headerImage=Image.asset("assets/images/intro_screen/image5.png");
     Timer.periodic(const Duration(seconds: 10), (timer) {

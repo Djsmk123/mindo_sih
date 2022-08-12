@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "190297759612",
+    "project_id": "mindo-c6bbe",
+    "storage_bucket": "mindo-c6bbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190297759612:android:4e781d70b215d4af024ef9",
+        "android_client_info": {
+          "package_name": "com.thematrix.mindo.mindo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190297759612-5fbk780k7v3tu1om2d7tq31evmqbdte1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thematrix.mindo.mindo",
+            "certificate_hash": "9d895f18b33edbd8ddba5dfb34a41d2aba93ed20"
+          }
+        },
+        {
+          "client_id": "190297759612-84gf58hvl0col0de1knum85fp98t1alk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thematrix.mindo.mindo",
+            "certificate_hash": "1bf55123301998529ff614dd82a81a0aae66f46c"
+          }
+        },
+        {
+          "client_id": "190297759612-vf5il6eiejup4bmnpjvo7f54l380egs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1vJO1G49xcAT0ze52y7zFBj_ReXDQDbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190297759612-vf5il6eiejup4bmnpjvo7f54l380egs8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "190297759612-0lmfslm640b6srtc7dacv5q78as42b1u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.thematrix.mindo.mindo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
