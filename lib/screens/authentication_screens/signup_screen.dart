@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:mindo/models/signup_user_model.dart';
+import 'package:mindo/services/authentication_services.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/custom_rounded_button.dart';
@@ -19,6 +22,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final SignUpUserModel signUpUserModel=SignUpUserModel();
   final GlobalKey<FormState> formKey=GlobalKey<FormState>();
+  final Authentication authentication=Authentication();
+  bool isLoading=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,15 +186,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 100,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
-                    child: CustomButton(expandedWidth: true, onTap: () {
+                    child: CustomButton(expandedWidth: true, onTap: () async {
 
                       if(formKey.currentState!.validate()){
-                        Navigator.popUntil(context, (route) => route.isFirst);
-                        Navigator.push(context, MaterialPageRoute(builder: (builder)=>const LevelSelectionScreen()));
+                        try{
+                          setState((){
+                            isLoading=true;
+                          });
+                          await authentication.signUp(email: signUpUserModel.email!, password:signUpUserModel.pass!).then((value){
+                            Navigator.popUntil(context, (route) => route.isFirst);
+                            Navigator.push(context, MaterialPageRoute(builder: (builder)=>const LevelSelectionScreen()));
+                          });
+
+                        }
+                        catch(e)
+                      {
+                        Fluttertoast.showToast(msg: e.toString());
                       }
-                    }, buttonText:"Sign  in".toUpperCase()),
+                        setState((){
+                          isLoading=false;
+                        });
+
+                      }
+                    }, buttonText:"Sign  in".toUpperCase(),isLoading: isLoading,),
                   ),
-                )
+                ),
+
               ],
             ),
           ),

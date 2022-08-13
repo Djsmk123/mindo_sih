@@ -1,6 +1,9 @@
 
 
 
+
+// ignore_for_file: use_key_in_widget_constructors, file_names
+
 import 'package:flutter/material.dart';
 import 'package:simple_animations/stateless_animation/play_animation.dart';
 import 'package:simple_animations/timeline_tween/timeline_tween.dart';

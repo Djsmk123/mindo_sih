@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mindo/screens/school_level/level_selection_screen.dart';
 
 import '../components/background1.dart';
-import '../components/custom_rounded_button.dart';
 import '../config/theme.dart';
+import '../models/levels.dart';
 
 
 class LevelSelectionScreen extends StatelessWidget {
@@ -29,29 +29,70 @@ class LevelSelectionScreen extends StatelessWidget {
             ),),
           ),
         ),
-        Align(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 50,),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: CustomButton(
-                  color: Colors.white,
-                  expandedWidth: true, onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (builder)=> SchoolLevelsScreen()));
-                }, buttonText:"School Level".toUpperCase(),textColor:kPrimaryColor,),
-              ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: ListView.builder(
 
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: CustomButton(
-                  color: Colors.white,
-                  expandedWidth: true, onTap: () {
-                }, buttonText:"University Level".toUpperCase(),textColor:kPrimaryColor,),
-              )
-            ],
+                      itemBuilder: (itemBuilder,index){
+                      Map item=Stages.levels[index];
+                      Widget route=item['route'];
+                      return  Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+
+                        child: Bounce(
+                          onPressed:(){
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: (builder)=>route));
+                          },
+                          duration: const Duration(milliseconds: 200),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15.r),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: ListTile(
+                                    title: Center(
+                                      child: Text(item['title'],style: TextStyle(
+                                        color: kPrimaryColor,
+                                        fontSize:20.sp,
+                                        fontWeight: FontWeight.w600
+                                      ),
+                                      ),
+                                    ),
+
+                                    subtitle: Center(
+                                      child: Text(item['subtitle'],style: const TextStyle(
+                                        color: Colors.black
+                                      ),),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+
+                          ),
+                        )
+                      );
+                  },
+                    shrinkWrap: true,
+                    itemCount: Stages.levels.length,
+
+                  ),
+                ),
+              ],
+            ),
           ),
         )
       ],
